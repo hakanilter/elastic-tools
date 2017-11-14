@@ -1,0 +1,16 @@
+Usage:
+    export <options>
+    import <options>
+
+List of options:
+    path: Path of the storage system (required)
+    es.index: Name of the ElasticSearch index (required)
+    es.nodes: ElasticSearch hostname (required)
+    es.port: ElasticSearch port number (default: 9200)
+    es.mapping.id: Name of the id field in given dataset (default: id)
+    partitions: Number of partitions to be used during the write operation (default: 10)
+
+Example:
+    export "es.index=test/doc" "es.host=localhost" "path=/tmp/elastic"
+
+    

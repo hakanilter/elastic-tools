@@ -2,11 +2,11 @@
 
 Apache Spark based command line tools for ElasticSearch. It supports backup, restore features and diffrent data formats like Parquet, JSON and CSV.
 
-- **Backup**
+- **Export** (ElasticSearch -> Storage)
 
-	Writes ElasticSearch data from given index to a storage with a batch Spark job.
+	Export command reads data from given ElasticSearch index and writes to a storage with a batch Spark job.
 
-- **Restore**
+- **Import** (ElasticSearch <- Storage)
 
-	Reads data from a storage and writes to ElasticSearch.
+	Import command reads data from a storage and writes to ElasticSearch.
 
