@@ -10,6 +10,7 @@ List of options:
     es.mapping.id: Name of the id field in given dataset (default: id)
     format: The storage format, parquet, json or csv (default: parquet)
     partitions: Number of partitions to be used during the write operation (default: 10)
+    compression: Supported compression formats are gzip, bzip2, snappy (default: none)
 
 Example:
     ./elastic-tool export "es.index=test/doc" "es.nodes=localhost" "path=/tmp/elastic"
