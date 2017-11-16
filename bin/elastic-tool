@@ -1,0 +1,26 @@
+#!/bin/bash
+source ./env.sh
+
+COMMAND=$1
+
+INDEX=$2
+if [ ! -z "$INDEX" ]
+  then
+    INDEX="es.index=${INDEX}"
+fi
+
+PATH=$3
+if [ ! -z "$PATH" ]
+  then
+    PATH="path=${PATH}"
+fi
+
+/usr/bin/java \
+    ${OPTIONS} \
+    -cp ${LIB_PATH} \
+    "com.datapyro.tool.ElasticTool" \
+    ${COMMAND} \
+    ${PATH} \
+    ${INDEX} \
+    "es.node=${ELASTIC_NODES}" \
+    "es.port=${ELASTIC_PORT}"

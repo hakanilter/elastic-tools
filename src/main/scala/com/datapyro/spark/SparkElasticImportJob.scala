@@ -7,11 +7,12 @@ object SparkElasticImportJob {
 
   def run(options: Map[String, String]) = {
     val start = System.currentTimeMillis()
-    println("Starting restore " + options)
+    println("Starting restore job with options: " + options)
 
     // initialize context
+    val master = Option(System.getProperty("spark.master")).getOrElse("local[*]")
     val spark = SparkSession.builder
-      .master(Option(System.getProperty("spark.master")).getOrElse("local[*]"))
+      .master(master)
       .appName(getClass.getSimpleName)
       .getOrCreate()
 
@@ -23,12 +24,22 @@ object SparkElasticImportJob {
     )
     val elasticOptions = defaultOptions ++ options.filter(_._1.startsWith("es."))
 
-    // load parquet
-    val df = spark.read.parquet(options("path"))
-      .repartition(options.getOrElse("partitions", "10").toInt)
+    // prepare data frame
+    println("elastic options: " + elasticOptions)
+
+    val format = options.getOrElse("format", "parquet")
+    val input = if (format == "json") {
+      spark.read.json(options("path"))
+    } else if (format == "csv") {
+      spark.read.csv(options("path"))
+    } else {
+      spark.read.parquet(options("path"))
+    }
+
+    val df = input.repartition(options.getOrElse("partitions", "10").toInt)
 
     // save to es
-    EsSparkSQL.saveToEs(df, options("index"), elasticOptions)
+    EsSparkSQL.saveToEs(df, options("es.index"), elasticOptions)
 
     println("Restore completed in " + (System.currentTimeMillis() - start) + " ms")
   }

@@ -6,11 +6,12 @@ object SparkElasticExportJob {
 
   def run(options: Map[String, String]) = {
     val start = System.currentTimeMillis()
-    println("Starting backup " + options)
+    println("Starting export job with options: " + options)
 
     // initialize context
+    val master = Option(System.getProperty("spark.master")).getOrElse("local[*]")
     val spark = SparkSession.builder
-      .master(Option(System.getProperty("spark.master")).getOrElse("local[*]"))
+      .master(master)
       .appName(getClass.getSimpleName)
       .getOrCreate()
 
@@ -22,15 +23,27 @@ object SparkElasticExportJob {
     )
     val elasticOptions = defaultOptions ++ options.filter(_._1.startsWith("es."))
 
-    // save as parquet
-    spark.read
+    // prepare data frame
+    println("elastic options: " + elasticOptions)
+    val df = spark.read
       .format("org.elasticsearch.spark.sql")
-      .options(options)
-      .load(options("index"))
+      .options(elasticOptions)
+      .load(options("es.index"))
       .repartition(options.getOrElse("partitions", "10").toInt)
       .write
       .mode(SaveMode.Overwrite)
-      .parquet(options("path"))
+
+    val result = if (options.contains("compression")) {
+      df.option("compression", options("compression"))
+    } else {
+      df
+    }
+
+    options.getOrElse("format", "parquet") match {
+      case "parquet" => result.parquet(options("path"))
+      case "json" => result.json(options("path"))
+      case "csv" => result.csv(options("path"))
+    }
 
     println("Backup completed in " + (System.currentTimeMillis() - start) + " ms")
   }

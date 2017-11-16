@@ -8,9 +8,8 @@ List of options:
     es.nodes: ElasticSearch hostname (required)
     es.port: ElasticSearch port number (default: 9200)
     es.mapping.id: Name of the id field in given dataset (default: id)
+    format: The storage format, parquet, json or csv (default: parquet)
     partitions: Number of partitions to be used during the write operation (default: 10)
 
 Example:
-    export "es.index=test/doc" "es.host=localhost" "path=/tmp/elastic"
-
-    
+    ./elastic-tool export "es.index=test/doc" "es.nodes=localhost" "path=/tmp/elastic"
