@@ -1,7 +1,7 @@
 # Elastic Tools
 
 **Elastic Tools** is an [Apache Spark](https://github.com/apache/spark) based command line tool which designed to execute scalable and flexible 
-export / import operations on ElasticSearch.      
+export / import operations with ElasticSearch.      
   
 It supports different storage types like File System, HDFS, AWS S3, Azure Blob Storage and storage formats like Parquet, JSON and CSV. 
 
