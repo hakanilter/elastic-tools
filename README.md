@@ -22,8 +22,18 @@ It supports different storage types like File System, HDFS, AWS S3, Azure Blob S
     | compression | Supported compression formats are gzip, bzip2, snappy (default: none) |  
 
     Example:
-        ./elastic-tool export "es.index=test/doc" "es.nodes=localhost" "path=/tmp/elastic"    
-
+    
+    ```
+    $ ./elastic-tool export "es.index=test/doc" "es.nodes=localhost" "path=/tmp/elastic"
+    Starting export job with options: Map(es.index -> test/doc, es.nodes -> localhost, path -> /tmp/elastic)
+    2017-11-17 00:17:39 WARN  SparkContext:66 - Support for Scala 2.10 is deprecated as of Spark 2.1.0
+    2017-11-17 00:17:39 WARN  NativeCodeLoader:62 - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+    elastic options: Map(es.index -> test/doc, es.nodes.wan.only -> true, es.mapping.id -> id, pushdown -> true, es.nodes -> localhost)
+    [Stage 1:>                                                         (0 + 4) / 10]SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+    SLF4J: Defaulting to no-operation (NOP) logger implementation
+    SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+    Backup completed in 36862 ms    
+    ```            
 
 - **Import** (ElasticSearch <- Storage)
 
@@ -41,4 +51,16 @@ It supports different storage types like File System, HDFS, AWS S3, Azure Blob S
     | compression | Supported compression formats are gzip, bzip2, snappy (default: none) |
 
     Example:
-        ./elastic-tool import "es.index=test/doc" "es.nodes=localhost" "path=/tmp/elastic"    
+            
+    ```
+    $ ./elastic-tool import "es.index=test/doc" "es.nodes=localhost" "path=/tmp/elastic"
+    Starting restore job with options: Map(es.index -> test/doc, es.nodes -> localhost, path -> /tmp/elastic)
+    2017-11-17 00:19:09 WARN  SparkContext:66 - Support for Scala 2.10 is deprecated as of Spark 2.1.0
+    2017-11-17 00:19:09 WARN  NativeCodeLoader:62 - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+    elastic options: Map(es.index -> test/doc, es.nodes.wan.only -> true, es.mapping.id -> id, pushdown -> true, es.nodes -> localhost)
+    SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+    SLF4J: Defaulting to no-operation (NOP) logger implementation
+    SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+    Restore completed in 67540 ms
+    ```
+    
