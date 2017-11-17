@@ -1,6 +1,8 @@
 # Elastic Tools
 
-Apache Spark based command line tools for ElasticSearch. It supports backup, restore features and diffrent data formats like Parquet, JSON and CSV.
+Elastic Tools is an Apache Spark based command line tool designed to help scalable backup and restore support for ElasticSearch. 
+  
+It supports different storage types like File System, HDFS, AWS S3, Azure Blob Storage and storage formats like Parquet, JSON and CSV. 
 
 - **Export** (ElasticSearch -> Storage)
 
@@ -17,8 +19,8 @@ Apache Spark based command line tools for ElasticSearch. It supports backup, res
     | partitions |  Number of partitions to be used during the write operation (default: 10) |
     | compression | Supported compression formats are gzip, bzip2, snappy (default: none) |  
 
-Example:
-    ./elastic-tool export "es.index=test/doc" "es.nodes=localhost" "path=/tmp/elastic"    
+    Example:
+        ./elastic-tool export "es.index=test/doc" "es.nodes=localhost" "path=/tmp/elastic"    
 
 - **Import** (ElasticSearch <- Storage)
 
@@ -32,5 +34,8 @@ Example:
     | es.port |  ElasticSearch port number (default: 9200) | 
     | es.mapping.id |  Name of the id field in given dataset (default: id) | 
     | format |  The storage format, parquet or json (default: parquet) | 
-    | partitions |  Number of partitions to be used during the write operation (default: 10) | 
+    | partitions |  Number of partitions to be used during the read operation (default: 10) | 
     | compression | Supported compression formats are gzip, bzip2, snappy (default: none) |
+
+    Example:
+        ./elastic-tool import "es.index=test/doc" "es.nodes=localhost" "path=/tmp/elastic"    

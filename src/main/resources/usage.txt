@@ -9,7 +9,7 @@ List of options:
     es.port: ElasticSearch port number (default: 9200)
     es.mapping.id: Name of the id field in given dataset (default: id)
     format: The storage format, parquet, json or csv (default: parquet)
-    partitions: Number of partitions to be used during the write operation (default: 10)
+    partitions: Number of partitions to be used during the I/O operation (default: 10)
     compression: Supported compression formats are gzip, bzip2, snappy (default: none)
 
 Example:
