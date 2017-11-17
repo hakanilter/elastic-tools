@@ -24,6 +24,7 @@ It supports different storage types like File System, HDFS, AWS S3, Azure Blob S
     Example:
         ./elastic-tool export "es.index=test/doc" "es.nodes=localhost" "path=/tmp/elastic"    
 
+
 - **Import** (ElasticSearch <- Storage)
 
 	Import command reads data from a storage and writes to ElasticSearch.
