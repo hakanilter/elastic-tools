@@ -1,8 +1,10 @@
 # Elastic Tools
 
-Elastic Tools is an Apache Spark based command line tool designed to help scalable backup and restore support for ElasticSearch. 
+Elastic Tools is an Apache Spark based command line tools designed to help scalable backup and restore support for ElasticSearch. 
   
 It supports different storage types like File System, HDFS, AWS S3, Azure Blob Storage and storage formats like Parquet, JSON and CSV. 
+
+**Supported features:**
 
 - **Export** (ElasticSearch -> Storage)
 
