@@ -1,7 +1,4 @@
 #!/bin/bash
 source ./env.sh
 
-/usr/bin/java \
-    ${OPTIONS} \
-    -cp ${LIB_PATH} \
-    "com.datapyro.tool.ElasticTool" "$@"
+java ${OPTIONS} -cp ${LIB_PATH} "com.datapyro.tool.ElasticTool" "$@"
