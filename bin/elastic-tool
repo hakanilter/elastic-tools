@@ -1,4 +1,5 @@
 #!/bin/bash
+cd "$(dirname "$0")" || exit
 source ./env.sh
 
 java ${OPTIONS} -cp ${LIB_PATH} "com.datapyro.tool.ElasticTool" "$@"

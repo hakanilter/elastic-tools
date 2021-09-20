@@ -1,27 +1,16 @@
 package com.datapyro.spark
 
-import org.apache.spark.sql.{SaveMode, SparkSession}
+import com.datapyro.util.SparkHelper
+import org.apache.spark.sql.SaveMode
 
 object SparkElasticExportJob {
 
-  def run(options: Map[String, String]) = {
+  def run(options: Map[String, String]): Unit = {
     val start = System.currentTimeMillis()
     println("Starting export job with options: " + options)
 
-    // initialize context
-    val master = Option(System.getProperty("spark.master")).getOrElse("local[*]")
-    val spark = SparkSession.builder
-      .master(master)
-      .appName(getClass.getSimpleName)
-      .getOrCreate()
-
-    // read index data
-    val defaultOptions = Map(
-      "es.nodes.wan.only" -> "true",
-      "pushdown" -> "true",
-      "es.mapping.id" -> "id"
-    )
-    val elasticOptions = defaultOptions ++ options.filter(_._1.startsWith("es."))
+    val spark = SparkHelper.getSpark
+    val elasticOptions = SparkHelper.getOptions(options)
 
     // prepare data frame
     println("elastic options: " + elasticOptions)

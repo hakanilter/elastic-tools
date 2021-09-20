@@ -44,7 +44,7 @@ object ElasticTool extends App {
     }
   }
 
-  def showError() = {
+  def showError(): Unit = {
     val stream: InputStream = getClass.getResourceAsStream("/usage.txt")
     val usage = scala.io.Source.fromInputStream(stream).getLines.mkString("\n")
     println("\nERROR! Please enter valid options")

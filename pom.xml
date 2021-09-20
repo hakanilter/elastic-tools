@@ -15,15 +15,18 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <java.compiler.version>1.8</java.compiler.version>
-        <scala.version>2.10.6</scala.version>
-        <scala.tools.version>2.10</scala.tools.version>
+        <scala.version>2.11.11</scala.version>
+        <scala.tools.version>2.11</scala.tools.version>
         <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
         <maven-scala-plugin.version>3.2.0</maven-scala-plugin.version>
         <maven-surefire-plugin.version>2.12</maven-surefire-plugin.version>
         <maven-shade-plugin.version>2.3</maven-shade-plugin.version>
         <!-- Dependencies -->
-        <spark.version>2.1.0</spark.version>
-        <elasticsearch-hadoop.version>5.6.4</elasticsearch-hadoop.version>
+        <spark.version>2.4.8</spark.version>
+        <elasticsearch-hadoop.version>7.9.3</elasticsearch-hadoop.version>
+        <commons-configuration.version>1.10</commons-configuration.version>
+        <commons-collections.version>3.2.2</commons-collections.version>
+
         <slf4j.version>1.7.25</slf4j.version>
         <junit.version>4.10</junit.version>
     </properties>
@@ -34,7 +37,7 @@
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
             <version>${scala.version}</version>
-            <scope>compile</scope>
+            <!--<scope>compile</scope>-->
         </dependency>
         <!-- Spark -->
         <dependency>
@@ -63,6 +66,17 @@
                     <artifactId>log4j-over-slf4j</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <!-- Commons -->
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>${commons-collections.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-configuration</groupId>
+            <artifactId>commons-configuration</artifactId>
+            <version>${commons-configuration.version}</version>
         </dependency>
         <!-- Slf4j -->
         <dependency>

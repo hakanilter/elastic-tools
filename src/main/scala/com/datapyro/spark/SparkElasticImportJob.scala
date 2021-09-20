@@ -1,28 +1,16 @@
 package com.datapyro.spark
 
-import org.apache.spark.sql.SparkSession
+import com.datapyro.util.SparkHelper
 import org.elasticsearch.spark.sql.EsSparkSQL
 
 object SparkElasticImportJob {
 
-  def run(options: Map[String, String]) = {
+  def run(options: Map[String, String]): Unit = {
     val start = System.currentTimeMillis()
     println("Starting restore job with options: " + options)
 
-    // initialize context
-    val master = Option(System.getProperty("spark.master")).getOrElse("local[*]")
-    val spark = SparkSession.builder
-      .master(master)
-      .appName(getClass.getSimpleName)
-      .getOrCreate()
-
-    // read index data
-    val defaultOptions = Map(
-      "es.nodes.wan.only" -> "true",
-      "pushdown" -> "true",
-      "es.mapping.id" -> "id"
-    )
-    val elasticOptions = defaultOptions ++ options.filter(_._1.startsWith("es."))
+    val spark = SparkHelper.getSpark
+    val elasticOptions = SparkHelper.getOptions(options)
 
     // prepare data frame
     println("elastic options: " + elasticOptions)
